@@ -1,17 +1,53 @@
 const mongoose = require('mongoose');
 const key = require('./keys.js');
 
+/** Connect to MongoDB **/
+
 mongoose.connect("mongodb://" + key.username + ":" + key.password + "@ds139331.mlab.com:39331/expense-tracker", {
 	useNewUrlParser: true
 });
 
+const Schema = mongoose.Schema;
+
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
+
+/** Connection Message **/
 
 db.once('open', function(){
 	console.log('Database is connected!');
 });
 
+/** Balance Schema **/
+
+var balanceSchema = new Schema({
+	total: {type: Number, required: true},
+});
+
+/** Expense Schema **/
+
+var expenseSchema = new Schema({
+	name: {type: String, required: true},
+	date: {type: Date, default: Date.now},
+	amount: {type: Number, required: true},
+	category: {type: String, required: true}
+});
+
+/** Deposit Schema **/
+
+var depositSchema = new Schema({
+	name: {type: String, required: true},
+	date: {type: Date, default: Date.now},
+	amount: {type: Number, required: true},	
+});
+
+var Balance = mongoose.model('Balance', balanceSchema);
+var Expense = mongoose.model('Expense', expenseSchema);
+var Deposit = mongoose.model('Deposit', depositSchema);
+
 module.exports = {
-	db
+	db,
+	Balance,
+	Expense,
+	Deposit
 }
