@@ -1,0 +1,11 @@
+<html>
+<head>
+</head>
+<body>
+<ul>
+<% deposits.forEach(function(deposit){ %>
+	<li>$<%= deposit.amount %> - <%= deposit.date %></li>
+<% }); %>
+</ul>
+</body>
+</html>

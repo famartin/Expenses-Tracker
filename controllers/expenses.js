@@ -34,7 +34,7 @@ router.get('/list-expenses', function(req, res){
 	db.Expense.find(function(err, expenses){
 		if (err) throw err;
 		if (expenses != null){
-			res.render('list', {things: expenses})
+			res.render('list-expenses', {expenses: expenses})
 		}
 	});
 });

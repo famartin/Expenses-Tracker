@@ -24,4 +24,15 @@ router.post('/deposit', function(req, res){
 	res.redirect('/');
 });
 
+/** List Deposits GET Route **/
+
+router.get('/list-deposits', function(req, res){
+	db.Deposit.find(function(err, deposits){
+		if (err) throw err;
+		if (deposits != null){
+			res.render('list-deposits', {deposits: deposits})
+		}
+	});
+});
+
 module.exports = router;
