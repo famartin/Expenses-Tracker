@@ -28,4 +28,15 @@ router.post('/add-expense', function(req, res){
 	res.redirect('/');
 });
 
+/** List Expenses GET Route **/
+
+router.get('/list-expenses', function(req, res){
+	db.Expense.find(function(err, expenses){
+		if (err) throw err;
+		if (expenses != null){
+			res.render('list', {things: expenses})
+		}
+	});
+});
+
 module.exports = router;

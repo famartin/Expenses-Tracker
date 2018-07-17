@@ -2,13 +2,13 @@
 <head>
 </head>
 <body>
-	<p>Balance: $<%= balance[0].total %></p>
+	<p>Balance: $<%= balance[0].total.toFixed(2) %></p>
 	<h3>Add Expense</h3>
 	<form action="/add-expense" method="POST">
-		<input type="text" name="total" readonly value="<%= balance[0].total %>"><br>
+		<input type="text" name="total" readonly value="<%= balance[0].total.toFixed(2) %>"><br>
 		<input type="text" name="balanceId" readonly value="<%= balance[0]._id %>"><br>
 		<input type="text" name="name" placeholder="Expense Name"><br>
-		<input type="number" name="amount" placeholder="Amount"><br>
+		<input type="number" name="amount" placeholder="Amount" step="any" min="0" onchange="setTwoNumberDecimal"><br>
 		<select name="category">
 			<option value="" selected disabled hidden>Category</option>
   			<option value="food">Food</option>
@@ -16,6 +16,14 @@
   			<option value="bill">Bill</option>
   			<option value="fun">Fun</option>
 		</select><br>
+		<button type="submit">Submit</button>
+	</form>
+	<br>
+	<h3>Add to Balance</h3>
+	<form action="/deposit" method="POST">
+		<input type="text" name="total" readonly value="<%= balance[0].total.toFixed(2) %>"><br>
+		<input type="text" name="balanceId" readonly value="<%= balance[0]._id %>"><br>
+		<input type="number" name="amount" placeholder="Amount" step="any" min="0" onchange="setTwoNumberDecimal"><br>
 		<button type="submit">Submit</button>
 	</form>
 </body>
