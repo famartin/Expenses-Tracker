@@ -2,6 +2,7 @@
 <head>
 </head>
 <body>
+	<%- include('nav'); %>
 	<p>Balance: $<%= balance[0].total.toFixed(2) %></p>
 	<h3>Add Expense</h3>
 	<form action="/add-expense" method="POST">

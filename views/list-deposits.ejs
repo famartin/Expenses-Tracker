@@ -1,11 +1,21 @@
 <html>
 <head>
+<style>
+	table, th, td {
+		border: 1px solid black;
+	}
+</style>
 </head>
 <body>
-<ul>
+<%- include('nav'); %>
+<table style="width:100%">
+<tr>
+	<th>Amount</th>
+	<th>Date</th>
+</tr>
 <% deposits.forEach(function(deposit){ %>
-	<li>$<%= deposit.amount %> - <%= deposit.date %></li>
+	<tr><td>$<%= deposit.amount.toFixed(2) %></td><td><%= deposit.date.toDateString() %></td></tr>
 <% }); %>
-</ul>
+</table>
 </body>
 </html>
