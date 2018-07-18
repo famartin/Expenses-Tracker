@@ -16,7 +16,7 @@
 	<th>Category</th>
 </tr>
 <% expenses.forEach(function(expense){ %>
-	<tr><td><%= expense.name %></td><td>$<%= expense.amount.toFixed(2) %></td><td><%= expense.date.toDateString() %></td><td><%= expense.category.charAt(0).toUpperCase() + expense.category.slice(1) %></td></tr>
+	<tr><td><a href="/cancel-expense/<%= expense._id %>"><%= expense.name %></a></td><td>$<%= expense.amount.toFixed(2) %></td><td><%= expense.date.toDateString() %></td><td><%= expense.category.charAt(0).toUpperCase() + expense.category.slice(1) %></td></tr>
 <% }); %>
 </table>
 </body>

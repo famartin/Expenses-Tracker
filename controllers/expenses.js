@@ -8,24 +8,36 @@ router.post('/add-expense', function(req, res){
 	var expense = new db.Expense({
 		name: req.body.name,
 		amount: req.body.amount,
-		category: req.body.category
+		category: req.body.category,
+		balanceId: req.body.balanceId
 	});
 
 	expense.save(function(err){
 		if (err) throw err;
 	});
-	console.log(req.body.balanceId);
+
 	db.Balance.findOneAndUpdate({ _id: req.body.balanceId}, {
-		total: req.body.total - req.body.amount
+		$inc: {total: (req.body.amount * -1)}
 		}, function(err, balance){
 			if (err) throw err;
-			if (balance != null){
-				res.render('home', {balance: balance});
-			}
+			res.redirect('/');
 		}
 	);
-	
-	res.redirect('/');
+});
+
+/** Cancel Expense GET Route **/
+
+router.get('/cancel-expense/:id', function(req, res){
+	db.Expense.findOneAndDelete({_id: req.params.id}, function(err, expense){
+		if (err) throw err;
+
+		db.Balance.findOneAndUpdate({_id: expense.balanceId}, {
+			$inc: {total: expense.amount}
+		}, function(err, balance){
+				if (err) throw err;
+				res.redirect('/');
+		});
+	});
 });
 
 /** List Expenses GET Route **/

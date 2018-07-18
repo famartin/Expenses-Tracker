@@ -10,11 +10,11 @@
 <%- include('nav'); %>
 <table style="width:100%">
 <tr>
-	<th>Amount</th>
 	<th>Date</th>
+	<th>Amount</th>
 </tr>
 <% deposits.forEach(function(deposit){ %>
-	<tr><td>$<%= deposit.amount.toFixed(2) %></td><td><%= deposit.date.toDateString() %></td></tr>
+	<tr><td><%= deposit.date.toDateString() %></td><td><a href="/cancel-deposit/<%= deposit._id %>">$<%= deposit.amount.toFixed(2) %></a></td></tr>
 <% }); %>
 </table>
 </body>

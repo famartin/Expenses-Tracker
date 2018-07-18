@@ -21,7 +21,7 @@ db.once('open', function(){
 /** Balance Schema **/
 
 var balanceSchema = new Schema({
-	total: {type: Number, required: true},
+	total: {type: Number, required: true}
 });
 
 /** Expense Schema **/
@@ -30,14 +30,16 @@ var expenseSchema = new Schema({
 	name: {type: String, required: true},
 	date: {type: Date, default: Date.now},
 	amount: {type: Number, required: true},
-	category: {type: String, required: true}
+	category: {type: String, required: true},
+	balanceId: {type: String, required: true}
 });
 
 /** Deposit Schema **/
 
 var depositSchema = new Schema({
 	date: {type: Date, default: Date.now},
-	amount: {type: Number, required: true},	
+	amount: {type: Number, required: true},
+	balanceId: {type: String, required: true}
 });
 
 var Balance = mongoose.model('Balance', balanceSchema);

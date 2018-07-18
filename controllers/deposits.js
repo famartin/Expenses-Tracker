@@ -6,7 +6,8 @@ const db = require('../db.js');
 
 router.post('/deposit', function(req, res){
 	var deposit = new db.Deposit({
-		amount: req.body.amount
+		amount: req.body.amount,
+		balanceId: req.body.balanceId
 	});
 
 	deposit.save(function(err){
@@ -14,14 +15,28 @@ router.post('/deposit', function(req, res){
 	});
 
 	db.Balance.findOneAndUpdate({ _id: req.body.balanceId}, {
-		total: (req.body.total - 0) + (req.body.amount - 0)
+		$inc: {total: req.body.amount}
 		}, function(err, balance){
 			if (err) throw err;
-			res.render("home", {balance: balance});
+			res.redirect('/');
 		}
 	);
-	
-	res.redirect('/');
+});
+
+/** Cancel Deposit GET Route **/
+
+router.get('/cancel-deposit/:id', function(req, res){
+	db.Deposit.findOneAndDelete({_id: req.params.id}, function(err, deposit){
+		if (err) throw err;
+
+		db.Balance.findOneAndUpdate({_id: deposit.balanceId}, {
+			$inc: {total: (deposit.amount * -1)}
+		}, function(err, balance){
+				if (err) throw err;
+				res.redirect('/');
+			
+		});
+	});
 });
 
 /** List Deposits GET Route **/
