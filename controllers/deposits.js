@@ -45,7 +45,7 @@ router.get('/list-deposits', function(req, res){
 	db.Deposit.find(function(err, deposits){
 		if (err) throw err;
 		if (deposits != null){
-			res.render('list-deposits', {deposits: deposits})
+			res.render('list-deposits', {deposits: deposits.reverse()})
 		}
 	});
 });

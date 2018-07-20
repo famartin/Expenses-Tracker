@@ -49,7 +49,7 @@ router.get('/list-expenses', function(req, res){
 		for(var i = 0; i < expenses.length; i++){
 			sum += expenses[i].amount;
 		}
-		res.render('list-expenses', {expenses: expenses, total: sum});
+		res.render('list-expenses', {expenses: expenses.reverse(), total: sum});
 	});
 });
 
@@ -62,7 +62,7 @@ router.get('/list-expenses/:category', function(req, res){
 		for(var i = 0; i < expenses.length; i++){
 			sum += expenses[i].amount;
 		}
-		res.render('list-expenses', {expenses: expenses, total: sum});
+		res.render('list-expenses', {expenses: expenses.reverse(), total: sum});
 	});
 });
 
