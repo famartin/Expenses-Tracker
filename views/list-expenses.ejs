@@ -5,6 +5,7 @@
 		border: 1px solid black;
 	}
 </style>
+<%- include('head') %>
 </head>
 <body>
 <%- include('nav'); %>
@@ -28,5 +29,21 @@
 	<tr><td><a href="/cancel-expense/<%= expense._id %>"><%= expense.name %></a></td><td>$<%= expense.amount.toFixed(2) %></td><td><%= expense.date.toDateString() %></td><td><a href="/list-expenses/<%= expense.category %>"><%= expense.category.charAt(0).toUpperCase() + expense.category.slice(1) %></a></td></tr>
 <% }); %>
 </table>
+<canvas id="myChart"></canvas>
+<script>
+	let myChart = document.getElementById('myChart').getContext('2d');
+
+	let expenseChart = new Chart(myChart, {
+		type: 'pie',
+		data: {
+			labels: ['Food', 'Gas', 'Bill', 'Fun'],
+			datasets: [{
+				label: 'Categories',
+				data: [11, 39.5, 300, 45]
+			}]
+		},
+		options: {}
+	});
+</script>
 </body>
 </html>

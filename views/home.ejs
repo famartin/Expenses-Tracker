@@ -1,9 +1,11 @@
 <html>
 <head>
+<%- include('head') %>
 </head>
 <body>
 	<%- include('nav'); %>
 	<p>Balance: $<%= balance[0].total.toFixed(2) %></p>
+	<canvas id="myChart"></canvas>
 	<h3>Add Expense</h3>
 	<form action="/add-expense" method="POST">
 		<input type="text" name="balanceId" readonly value="<%= balance[0]._id %>"><br>
@@ -25,5 +27,25 @@
 		<input type="number" name="amount" placeholder="Amount" step="any" min="0" onchange="setTwoNumberDecimal"><br>
 		<button type="submit">Submit</button>
 	</form>
+	<script>
+		let myChart = document.getElementById('myChart').getContext('2d');
+
+		let massPopChart = new Chart(myChart, {
+			type: 'bar',
+			data: {
+				labels: ['Food', 'Gas', 'Bill', 'Fun'],
+				datasets: [
+					{
+						label: 'Data',
+						data: [
+							10, 20, 30, 40
+						]
+					}
+				],
+				
+			},
+			options: {}
+		});
+	</script>
 </body>
 </html>
