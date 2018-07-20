@@ -8,6 +8,15 @@
 </head>
 <body>
 <%- include('nav'); %>
+<h4>Category</h4>
+<ul>
+<li><a href="/list-expenses">All</a></li>
+<li><a href="/list-expenses/food">Food</a></li>
+<li><a href="/list-expenses/gas">Gas</a></li>
+<li><a href="/list-expenses/bill">Bill</a></li>
+<li><a href="/list-expenses/fun">Fun</a></li>
+</ul>
+<h4>Total: $<%= total.toFixed(2) %></h4>
 <table style="width:100%">
 <tr>
 	<th>Name</th>
@@ -16,7 +25,7 @@
 	<th>Category</th>
 </tr>
 <% expenses.forEach(function(expense){ %>
-	<tr><td><a href="/cancel-expense/<%= expense._id %>"><%= expense.name %></a></td><td>$<%= expense.amount.toFixed(2) %></td><td><%= expense.date.toDateString() %></td><td><%= expense.category.charAt(0).toUpperCase() + expense.category.slice(1) %></td></tr>
+	<tr><td><a href="/cancel-expense/<%= expense._id %>"><%= expense.name %></a></td><td>$<%= expense.amount.toFixed(2) %></td><td><%= expense.date.toDateString() %></td><td><a href="/list-expenses/<%= expense.category %>"><%= expense.category.charAt(0).toUpperCase() + expense.category.slice(1) %></a></td></tr>
 <% }); %>
 </table>
 </body>

@@ -45,9 +45,24 @@ router.get('/cancel-expense/:id', function(req, res){
 router.get('/list-expenses', function(req, res){
 	db.Expense.find(function(err, expenses){
 		if (err) throw err;
-		if (expenses != null){
-			res.render('list-expenses', {expenses: expenses})
+		var sum = 0;
+		for(var i = 0; i < expenses.length; i++){
+			sum += expenses[i].amount;
 		}
+		res.render('list-expenses', {expenses: expenses, total: sum});
+	});
+});
+
+/** List Expenses by Category GET Route **/
+
+router.get('/list-expenses/:category', function(req, res){
+	db.Expense.find({category: req.params.category},function(err, expenses){
+		if (err) throw err;
+		var sum = 0;
+		for(var i = 0; i < expenses.length; i++){
+			sum += expenses[i].amount;
+		}
+		res.render('list-expenses', {expenses: expenses, total: sum});
 	});
 });
 
