@@ -42,27 +42,61 @@ router.get('/cancel-expense/:id', function(req, res){
 
 /** List Expenses GET Route **/
 
-router.get('/list-expenses', function(req, res){
+router.get('/list-expenses/:category*?', function(req, res){
 	db.Expense.find(function(err, expenses){
 		if (err) throw err;
 		var sum = 0;
-		for(var i = 0; i < expenses.length; i++){
+		for (var i = 0; i < expenses.length; i++){
 			sum += expenses[i].amount;
 		}
-		res.render('list-expenses', {expenses: expenses.reverse(), total: sum});
-	});
-});
+		db.Expense.find({category: 'food'}, function(err, foodExpenses){
+			if (err) throw err;
+			var foodSum = 0;
+			for (var i = 0; i < foodExpenses.length; i++){
+				foodSum += foodExpenses[i].amount;
+			}
+			db.Expense.find({category: 'gas'}, function(err, gasExpenses){
+				if (err) throw err;
+				var gasSum = 0;
+				for (var i = 0; i < gasExpenses.length; i++){
+					gasSum += gasExpenses[i].amount;
+				}
+				db.Expense.find({category: 'bill'}, function(err, billExpenses){
+					if (err) throw err;
+					var billSum = 0;
+					for (var i = 0; i < billExpenses.length; i++){
+						billSum += billExpenses[i].amount;
+					}
+					db.Expense.find({category: 'fun'}, function(err, funExpenses){
+						if (err) throw err;
+						var funSum = 0;
+						for (var i = 0; i < funExpenses.length; i++){
+							funSum += funExpenses[i].amount;
+						}
+						db.Balance.find(function(err, balance){
+							if (err) throw err;
 
-/** List Expenses by Category GET Route **/
+							var cats = {
+								"food": foodExpenses,
+								"gas": gasExpenses,
+								"bill": billExpenses,
+								"fun": funExpenses
+							};
 
-router.get('/list-expenses/:category', function(req, res){
-	db.Expense.find({category: req.params.category},function(err, expenses){
-		if (err) throw err;
-		var sum = 0;
-		for(var i = 0; i < expenses.length; i++){
-			sum += expenses[i].amount;
-		}
-		res.render('list-expenses', {expenses: expenses.reverse(), total: sum});
+							var expenseList = expenses;
+
+							for (var key in cats){
+								if (req.params.category == key)
+									var expenseList = cats[key];
+							}
+
+							res.render('list-expenses', {expenses: expenseList.reverse(), total: sum, foodSum: foodSum, gasSum: gasSum, billSum: billSum, funSum: funSum, balance: balance});
+							
+						});
+					});
+				});
+			});
+		});
 	});
 });
 

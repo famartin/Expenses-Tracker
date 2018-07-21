@@ -34,12 +34,13 @@
 	let myChart = document.getElementById('myChart').getContext('2d');
 
 	let expenseChart = new Chart(myChart, {
-		type: 'pie',
+		type: 'doughnut',
 		data: {
-			labels: ['Food', 'Gas', 'Bill', 'Fun'],
+			labels: ['Food', 'Gas', 'Bill', 'Fun', 'Balance'],
 			datasets: [{
 				label: 'Categories',
-				data: [11, 39.5, 300, 45]
+				data: [<%= foodSum %>, <%= gasSum %>, <%= billSum %>, <%= funSum %>, <%= balance[0].total %>],
+				backgroundColor: ['#fc7474', '#7cbbf9', '#59876a', '#efaf5b', '#b5b5b5']
 			}]
 		},
 		options: {}
