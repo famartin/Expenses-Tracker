@@ -1,7 +1,9 @@
 <html>
 <head>
+<%- include('head') %>
 </head>
 <body>
+	<div class="container">
 	<%- include('nav'); %>
 	<p>Balance: $<%= balance[0].total.toFixed(2) %></p>
 	<h3>Add Expense</h3>
@@ -25,5 +27,6 @@
 		<input type="number" name="amount" placeholder="Amount" step="any" min="0" onchange="setTwoNumberDecimal"><br>
 		<button type="submit">Submit</button>
 	</form>
+	</div>
 </body>
 </html>

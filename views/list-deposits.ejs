@@ -1,5 +1,6 @@
 <html>
 <head>
+<%- include('head') %>
 <style>
 	table, th, td {
 		border: 1px solid black;
@@ -7,6 +8,7 @@
 </style>
 </head>
 <body>
+<div class="container">
 <%- include('nav'); %>
 <table style="width:100%">
 <tr>
@@ -17,5 +19,65 @@
 	<tr><td><%= deposit.date.toDateString() %></td><td><a href="/cancel-deposit/<%= deposit._id %>">$<%= deposit.amount.toFixed(2) %></a></td></tr>
 <% }); %>
 </table>
+<canvas id="myChart"></canvas>
+</div>
+<script>
+	let myChart = document.getElementById('myChart').getContext('2d');
+
+	let depositChart = new Chart(myChart, {
+		type: 'line',
+		data: {
+			labels: [
+				'Jan',
+				'Feb',
+				'Mar',
+				'Apr',
+				'May',
+				'Jun',
+				'Jul',
+				'Aug',
+				'Sep',
+				'Oct',
+				'Nov',
+				'Dec'
+			],
+			datasets: [{
+				label: 'Deposits',
+				data: [0, 200, 400, 600, 800, 1000, 5, 6, 88, 90, 112, 1466],
+				fill: false
+			}]
+		},
+		options: {
+			responsive: true,
+			title: {
+				display: true,
+				text: 'Deposits over a year'
+			},
+			scales: {
+				xAxes: [{
+					display: true,
+					scaleLabel: {
+						display: true,
+						labelString: 'Month'
+					}
+				}],
+				yAxes: [{
+					display: true,
+					scaleLabel: {
+						display: true,
+						labelString: 'Amount in dollars'
+					}
+				}]
+			},
+			animation: {
+            	duration: 0,
+        	},
+        	hover: {
+            	animationDuration: 0,
+        	},
+        	responsiveAnimationDuration: 0
+		}
+	});
+</script>
 </body>
 </html>

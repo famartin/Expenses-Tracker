@@ -8,6 +8,7 @@
 <%- include('head') %>
 </head>
 <body>
+<div class="container">
 <%- include('nav'); %>
 <h4>Category</h4>
 <ul>
@@ -30,6 +31,7 @@
 <% }); %>
 </table>
 <canvas id="myChart"></canvas>
+</div>
 <script>
 	let myChart = document.getElementById('myChart').getContext('2d');
 
@@ -43,7 +45,12 @@
 				backgroundColor: ['#fc7474', '#7cbbf9', '#59876a', '#efaf5b', '#b5b5b5']
 			}]
 		},
-		options: {}
+		options: {
+			title: {
+				display: true,
+				text: 'Expenses by Category'
+			}
+		}
 	});
 </script>
 </body>
