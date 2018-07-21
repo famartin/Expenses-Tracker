@@ -53,6 +53,10 @@
 				display: true,
 				text: 'Deposits over a year'
 			},
+			hover: {
+				mode: 'nearest',
+				intersect: true
+			},
 			scales: {
 				xAxes: [{
 					display: true,
@@ -68,14 +72,7 @@
 						labelString: 'Amount in dollars'
 					}
 				}]
-			},
-			animation: {
-            	duration: 0,
-        	},
-        	hover: {
-            	animationDuration: 0,
-        	},
-        	responsiveAnimationDuration: 0
+			}
 		}
 	});
 </script>
