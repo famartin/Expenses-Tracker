@@ -77,17 +77,19 @@ router.get('/list-expenses/:category*?', function(req, res){
 							if (err) throw err;
 
 							var cats = {
-								"food": foodExpenses,
-								"gas": gasExpenses,
-								"bill": billExpenses,
-								"fun": funExpenses
+								"food": [foodExpenses, foodSum],
+								"gas": [gasExpenses, gasSum],
+								"bill": [billExpenses, billSum],
+								"fun": [funExpenses, funSum]
 							};
 
 							var expenseList = expenses;
 
 							for (var key in cats){
-								if (req.params.category == key)
-									var expenseList = cats[key];
+								if (req.params.category == key){
+									var expenseList = cats[key][0];
+									sum = cats[key][1];
+								}
 							}
 
 							res.render('list-expenses', {expenses: expenseList.reverse(), total: sum, foodSum: foodSum, gasSum: gasSum, billSum: billSum, funSum: funSum, balance: balance});
