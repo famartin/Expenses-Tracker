@@ -8,16 +8,11 @@
 <%- include('head') %>
 </head>
 <body>
-<div class="container">
+<div class="wrapper">
 <%- include('nav'); %>
-<h4>Category</h4>
-<ul>
-<li><a href="/list-expenses">All</a></li>
-<li><a href="/list-expenses/food">Food</a></li>
-<li><a href="/list-expenses/gas">Gas</a></li>
-<li><a href="/list-expenses/bill">Bill</a></li>
-<li><a href="/list-expenses/fun">Fun</a></li>
-</ul>
+<div class="container" id="content">
+<%- include('nav-button') %>
+<h4>Category:</h4>
 <h4>Total: $<%= total.toFixed(2) %></h4>
 <table style="width:100%">
 <tr>
@@ -32,6 +27,8 @@
 </table>
 <canvas id="myChart"></canvas>
 </div>
+</div>
+<%- include('js-scripts'); %>
 <script>
 	let myChart = document.getElementById('myChart').getContext('2d');
 

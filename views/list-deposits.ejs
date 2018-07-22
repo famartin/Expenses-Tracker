@@ -8,8 +8,10 @@
 </style>
 </head>
 <body>
-<div class="container">
+<div class="wrapper">
 <%- include('nav'); %>
+<div class="container" id="content">
+<%- include('nav-button'); %>
 <table style="width:100%">
 <tr>
 	<th>Date</th>
@@ -22,6 +24,8 @@
 </table>
 <canvas id="myChart"></canvas>
 </div>
+</div>
+<%- include('js-scripts'); %>
 <script>
 	let myChart = document.getElementById('myChart').getContext('2d');
 

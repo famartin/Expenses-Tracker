@@ -1,5 +1,40 @@
-<nav>
-<a href="/">Home</a>
-<a href="/list-expenses">Expenses</a>
-<a href="/list-deposits">Deposits</a>
+<nav id="sidebar">
+	<div class="sidebar-header">
+		<h3>Expense Tracker</h3>
+	</div>
+	<ul class="list-unstyled components">
+		<p>Menu</p>
+		<li class="active">
+			<a href="/">Home</a>
+        </li>
+       	<li>
+        	<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Expenses</a>
+		<ul class="collapse list-unstyled" id="pageSubmenu">
+			<li>
+				<a href="/list-expenses">All</a>
+			</li>
+			<li>
+				<a href="/list-expenses/food">Food</a>
+			</li>
+			<li>
+				<a href="/list-expenses/gas">Gas</a>
+			</li>
+			<li>
+				<a href="/list-expenses/bill">Bills</a>
+			</li>
+			<li>
+				<a href="/list-expenses/fun">Fun</a>
+			</li>
+		</ul>
+		</li>
+		<li>
+			<a href="/list-deposits">Deposits</a>
+		</li>
+		<li>
+			<a href="#">About</a>
+		</li>
+		<li>
+			<a href="#">Contact</a>
+		</li>
+	</ul>
 </nav>
