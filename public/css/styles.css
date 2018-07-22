@@ -4,6 +4,15 @@
     align-items: stretch;
 }
 
+table tr {
+	/*border-top: .5em solid #fff;*/
+	color: #3d3d3d;
+}
+
+table tr a {
+	color: #3d3d3d;
+}
+
 #sidebar {
     min-width: 200px;
     max-width: 200px;
@@ -32,11 +41,13 @@
     padding: 10px;
     font-size: 1.1em;
     display: block;
+	color: #fff;
 }
 
 #sidebar ul li a:hover {
     color: #7386D5;
     background: #fff;
+	text-decoration: none;
 }
 
 #sidebar ul li.active > a, a[aria-expanded="true"] {
