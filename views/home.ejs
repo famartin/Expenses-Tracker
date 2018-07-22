@@ -24,6 +24,7 @@
 	<h3>Add to Balance</h3>
 	<form action="/deposit" method="POST">
 		<input type="text" name="balanceId" readonly value="<%= balance[0]._id %>"><br>
+		<textarea rows="3" name="description" placeholder="Short description [30 character max]"></textarea><br>
 		<input type="number" name="amount" placeholder="Amount" step="any" min="0" onchange="setTwoNumberDecimal"><br>
 		<button type="submit">Submit</button>
 	</form>

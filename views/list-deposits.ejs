@@ -14,9 +14,10 @@
 <tr>
 	<th>Date</th>
 	<th>Amount</th>
+	<th>Description</th>
 </tr>
 <% deposits.forEach(function(deposit){ %>
-	<tr><td><%= deposit.date.toDateString() %></td><td><a href="/cancel-deposit/<%= deposit._id %>">$<%= deposit.amount.toFixed(2) %></a></td></tr>
+	<tr><td><%= deposit.date.toDateString() %></td><td><a href="/cancel-deposit/<%= deposit._id %>">$<%= deposit.amount.toFixed(2) %></a></td><td><%= deposit.description.substr(0, 30) %></td></tr>
 <% }); %>
 </table>
 <canvas id="myChart"></canvas>
@@ -34,6 +35,7 @@
 			],
 			datasets: [{
 				label: 'Deposits',
+				borderColor: '#4286f4',
 				data: [
 					<% deposits.forEach(function(deposit){ %>
 					<%= deposit.amount.toFixed(2) %>,

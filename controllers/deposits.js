@@ -7,7 +7,8 @@ const db = require('../db.js');
 router.post('/deposit', function(req, res){
 	var deposit = new db.Deposit({
 		amount: req.body.amount,
-		balanceId: req.body.balanceId
+		balanceId: req.body.balanceId,
+		description: req.body.description
 	});
 
 	deposit.save(function(err){

@@ -39,7 +39,8 @@ var expenseSchema = new Schema({
 var depositSchema = new Schema({
 	date: {type: Date, default: Date.now},
 	amount: {type: Number, required: true},
-	balanceId: {type: String, required: true}
+	balanceId: {type: String, required: true},
+	description: {type: String}
 });
 
 var Balance = mongoose.model('Balance', balanceSchema);
