@@ -75,7 +75,6 @@ router.get('/list-expenses/:category*?', function(req, res){
 						}
 						db.Balance.find(function(err, balance){
 							if (err) throw err;
-
 							var cats = {
 								"food": [foodExpenses, foodSum],
 								"gas": [gasExpenses, gasSum],
@@ -91,9 +90,15 @@ router.get('/list-expenses/:category*?', function(req, res){
 									sum = cats[key][1];
 								}
 							}
-
-							res.render('list-expenses', {expenses: expenseList.reverse(), total: sum, foodSum: foodSum, gasSum: gasSum, billSum: billSum, funSum: funSum, balance: balance});
-							
+							res.render('list-expenses', {
+								expenses: expenseList.reverse(),
+								total: sum,
+								foodSum: foodSum,
+								gasSum: gasSum,
+								billSum: billSum,
+								funSum: funSum,
+								balance: balance
+							});	
 						});
 					});
 				});

@@ -20,8 +20,7 @@ router.post('/deposit', function(req, res){
 		}, function(err, balance){
 			if (err) throw err;
 			res.redirect('/');
-		}
-	);
+	});
 });
 
 /** Cancel Deposit GET Route **/
@@ -34,8 +33,7 @@ router.get('/cancel-deposit/:id', function(req, res){
 			$inc: {total: (deposit.amount * -1)}
 		}, function(err, balance){
 				if (err) throw err;
-				res.redirect('/');
-			
+				res.redirect('/');			
 		});
 	});
 });

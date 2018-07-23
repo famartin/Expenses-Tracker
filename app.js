@@ -15,20 +15,21 @@ app.use(express.static(__dirname + '/public'));
 
 app.use('/', expenses, deposits);
 
+/* Check to see if the object is empty */
 function isEmpty(obj) {
     for(var key in obj) {
         if(obj.hasOwnProperty(key))
-            return false;
+            return (false);
     }
-    return true;
+    return (true);
 }
 
+/** Home GET Route **/
+
 app.get('/', function(req, res){
-	//console.log('you are home');
 	db.Balance.find(function(err, balance){
 		if (err) throw err;
 		if (!isEmpty(balance)){
-			//console.log(balance);
 			res.render('home', {balance: balance});
 		}
 		else
@@ -36,8 +37,9 @@ app.get('/', function(req, res){
 	});
 });
 
+/** Add Initial Balance POST Route **/
+
 app.post('/', function(req, res){
-	//console.log(req.body);
 	var balance = new db.Balance({
 		total: req.body.balance
 	});
@@ -47,6 +49,8 @@ app.post('/', function(req, res){
 		res.redirect('/');
 	});
 });
+
+/** Listen to the port **/
 
 http.listen(port, function(){
 	console.log(`Listening on port ${port}`);

@@ -43,6 +43,8 @@ var depositSchema = new Schema({
 	description: {type: String}
 });
 
+/** Create the Models **/
+
 var Balance = mongoose.model('Balance', balanceSchema);
 var Expense = mongoose.model('Expense', expenseSchema);
 var Deposit = mongoose.model('Deposit', depositSchema);
