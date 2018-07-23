@@ -45,9 +45,12 @@ router.get('/cancel-deposit/:id', function(req, res){
 router.get('/list-deposits', function(req, res){
 	db.Deposit.find(function(err, deposits){
 		if (err) throw err;
-		if (deposits != null){
-			res.render('list-deposits', {deposits: deposits.reverse()})
+
+		var sum = 0;
+		for (var i = 0; i < deposits.length; i++){
+			sum += deposits[i].amount;
 		}
+		res.render('list-deposits', {deposits: deposits.reverse(), sum: sum})
 	});
 });
 

@@ -1,25 +1,29 @@
 <html>
 <head>
 <%- include('head') %>
-<style>
-	table, th, td {
-		border: 1px solid black;
-	}
-</style>
 </head>
 <body>
 <div class="wrapper">
 <%- include('nav'); %>
 <div class="container" id="content">
 <%- include('nav-button'); %>
-<table style="width:100%">
-<tr>
-	<th>Date</th>
-	<th>Amount</th>
-	<th>Description</th>
-</tr>
+<h4>Total: $<%= sum.toFixed(2) %></h4>
+<table style="width:100%" class="table table-hover">
+<thead class="thead-dark">
+	<tr>
+		<th scope="col">Date</th>
+		<th scope="col">Amount</th>
+		<th scope="col">Description</th>
+		<th scope="col">Cancel</th>
+	</tr>
+</thead>
 <% deposits.forEach(function(deposit){ %>
-	<tr><td><%= deposit.date.toDateString() %></td><td><a href="/cancel-deposit/<%= deposit._id %>">$<%= deposit.amount.toFixed(2) %></a></td><td><%= deposit.description.substr(0, 30) %></td></tr>
+	<tr>
+		<td><%= deposit.date.toDateString() %></td>
+		<td>$<%= deposit.amount.toFixed(2) %></td>
+		<td><%= deposit.description.substr(0, 30) %></td>
+		<td><a href="/cancel-deposit/<%= deposit._id %>">Cancel</a></td>
+	</tr>
 <% }); %>
 </table>
 <canvas id="myChart"></canvas>

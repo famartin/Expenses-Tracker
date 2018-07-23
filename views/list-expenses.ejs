@@ -16,6 +16,7 @@
 	<th scope="col">Amount</th>
 	<th scope="col">Date</th>
 	<th scope="col">Category</th>
+	<th scope="col">Cancel</th>
 	</tr>
 </thead>
 <% expenses.forEach(function(expense){ %>
@@ -29,15 +30,12 @@
 	<%		var bgColor = "#ead9f9"; %>
 	<% } %>
 	<tr>
-		<td>
-			<a href="/cancel-expense/<%= expense._id %>"><%= expense.name %></a>
-		</td>
-		<td>$<%= expense.amount.toFixed(2) %>
-		</td>
-		<td><%= expense.date.toDateString() %>
-		</td>
+		<td><%= expense.name %></td>
+		<td>$<%= expense.amount.toFixed(2) %></td>
+		<td><%= expense.date.toDateString() %></td>
 		<td><a href="/list-expenses/<%= expense.category %>"><%= expense.category.charAt(0).toUpperCase() + expense.category.slice(1) %></a>
 		</td>
+		<td><a href="/cancel-expense/<%= expense._id %>">Cancel</a></td>
 	</tr>
 <% }); %>
 </table>
