@@ -7,12 +7,15 @@
 	<%- include('nav'); %>
 	<div class="container" id="content">
 	<%- include('nav-button') %>
+	<br>
 	<h4>Balance: $<%= balance[0].total.toFixed(2) %></h4>
-	<h4>Add Expense</h4>
+	<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#addExpenseForm" aria-expanded="false" aria-controls="collapseExample">Add Expense</button>
+<div class="collapse" id="addExpenseForm">
+  <div class="card card-body">
 	<form action="/add-expense" method="POST">
 		<div class="form-group">
-		<input class="form-control" type="text" name="balanceId" readonly value="<%= balance[0]._id %>">
-		<input class="form-control" type="text" name="name" placeholder="Expense Name">
+		<input class="form-control" type="text" name="balanceId" readonly value="<%= balance[0]._id %>"><br>
+		<input class="form-control" type="text" name="name" placeholder="Expense Name"><br>
 		<div class="input-group mb-3">
 		<div class="input-group-prepend">
     		<span class="input-group-text">$</span>
@@ -31,14 +34,27 @@
 		</div>
 		<button type="submit" class="btn btn-primary">Submit</button>
 	</form>
+</div>
+</div>
 	<br>
-	<h4>Add to Balance</h4>
+	<br>
+	<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#addDepositForm" aria-expanded="false" aria-controls="collapseExample">Add to Balance</button>
+	<div class="collapse" id="addDepositForm">
+  	<div class="card card-body">
 	<form action="/deposit" method="POST">
-		<input type="text" name="balanceId" readonly value="<%= balance[0]._id %>"><br>
-		<textarea rows="3" name="description" placeholder="Short description [30 character max]"></textarea><br>
-		<input type="number" name="amount" placeholder="Amount" step="any" min="0" onchange="setTwoNumberDecimal"><br>
-		<button type="submit">Submit</button>
+		<div class="form-group">
+		<input class="form-control" type="text" name="balanceId" readonly value="<%= balance[0]._id %>"><br>
+		<textarea class="form-control" rows="3" name="description" placeholder="Short description [30 character max]"></textarea><br>
+		<div class="input-group mb-3">
+		<div class="input-group-prepend">
+			<span class="input-group-text">$</span>
+		</div>
+		<input class="form-control" type="number" name="amount" placeholder="Amount" step="any" min="0" onchange="setTwoNumberDecimal">
+		</div>
+		<button class="btn btn-primary" type="submit">Submit</button>
 	</form>
+	</div>
+	</div>
 	</div>
 	</div>
 	<%- include('js-scripts') %>
