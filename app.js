@@ -5,6 +5,7 @@ const port = 3000;
 const db = require('./db.js');
 const expenses = require('./controllers/expenses.js');
 const deposits = require('./controllers/deposits.js');
+const users = require('./controllers/users.js');
 const passport = require('passport');
 const bcrypt = require('bcryptjs');
 const LocalStrategy = require('passport-local').Strategy;
@@ -16,7 +17,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public'));
 
-app.use('/', expenses, deposits);
+app.use('/', expenses, deposits, users);
 
 /** Passport Initialization **/
 

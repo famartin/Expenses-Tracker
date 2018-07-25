@@ -55,10 +55,12 @@ var depositSchema =	new Schema({
 var Balance = mongoose.model('Balance', balanceSchema);
 var Expense = mongoose.model('Expense', expenseSchema);
 var Deposit = mongoose.model('Deposit', depositSchema);
+var User = mongoose.model('User', userSchema);
 
 module.exports = {
 	db,
 	Balance,
 	Expense,
-	Deposit
+	Deposit,
+	User
 }
