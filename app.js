@@ -30,7 +30,12 @@ passport.use(new LocalStrategy(function(username, password, done){
 			return done(err);
 		if (user == null)
 			return done(null, false);
-		
+		bcrypt.compare(password, user.password, function(err, response){
+			if (reponse == true)
+				return done(null, user);
+			else
+				return done(null, false);
+		});
 	});
 }));
 

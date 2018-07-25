@@ -18,29 +18,36 @@ db.once('open', function(){
 	console.log('Database is connected!');
 });
 
+/** User Schema **/
+
+var userSchema =	new Schema({
+	username:		{type: String, unique: true, required: true},
+	password:		{type: String, required: true}
+});
+
 /** Balance Schema **/
 
-var balanceSchema = new Schema({
-	total: {type: Number, required: true}
+var balanceSchema =	new Schema({
+	total:			{type: Number, required: true}
 });
 
 /** Expense Schema **/
 
-var expenseSchema = new Schema({
-	name: {type: String, required: true},
-	date: {type: Date, default: Date.now},
-	amount: {type: Number, required: true},
-	category: {type: String, required: true},
-	balanceId: {type: String, required: true}
+var expenseSchema =	new Schema({
+	name:			{type: String, required: true},
+	date:			{type: Date, default: Date.now},
+	amount:			{type: Number, required: true},
+	category:		{type: String, required: true},
+	balanceId:		{type: String, required: true}
 });
 
 /** Deposit Schema **/
 
-var depositSchema = new Schema({
-	date: {type: Date, default: Date.now},
-	amount: {type: Number, required: true},
-	balanceId: {type: String, required: true},
-	description: {type: String}
+var depositSchema =	new Schema({
+	date:			{type: Date, default: Date.now},
+	amount:			{type: Number, required: true},
+	balanceId:		{type: String, required: true},
+	description:	{type: String}
 });
 
 /** Create the Models **/
