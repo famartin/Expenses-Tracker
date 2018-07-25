@@ -9,6 +9,7 @@ const users = require('./controllers/users.js');
 const passport = require('passport');
 const bcrypt = require('bcryptjs');
 const LocalStrategy = require('passport-local').Strategy;
+const expressValidator = require('express-validator');
 var bodyParser = require('body-parser');
 
 app.set('view engine', 'ejs');
