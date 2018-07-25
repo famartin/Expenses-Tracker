@@ -17,12 +17,13 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public'));
+app.use(expressValidator());
 
-app.use('/', expenses, deposits, users);
 
 /** Passport Initialization **/
 
 app.use(passport.initialize());
+app.use(passport.session());
 
 /** Passport Local Strategy **/
 
@@ -40,6 +41,8 @@ passport.use(new LocalStrategy(function(username, password, done){
 		});
 	});
 }));
+
+app.use('/', expenses, deposits, users);
 
 /* Check to see if the object is empty */
 function isEmpty(obj) {

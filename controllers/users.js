@@ -13,6 +13,19 @@ var checkFormFields = function(req){
 	req.checkBody('username', 'Username must be between 5-15 characters long.').len(5, 15);
 }
 
+/** Login GET Route **/
+
+router.get('/login', function(req, res){
+	res.render('login');
+});
+
+/** Login POST Route **/
+
+router.post('/login', passport.authenticate('local', {
+	successRedirect: '/',
+	failureRedirect: '/login'
+}));
+
 /** SignUp GET Route **/
 
 router.get('/signup', function(req, res){
