@@ -5,6 +5,8 @@ const port = 3000;
 const db = require('./db.js');
 const expenses = require('./controllers/expenses.js');
 const deposits = require('./controllers/deposits.js');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
 var bodyParser = require('body-parser');
 
 app.set('view engine', 'ejs');

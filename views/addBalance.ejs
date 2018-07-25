@@ -1,11 +1,12 @@
 <html>
 <head>
+	<%- include('head'); %>
 </head>
 <body>
 <form action="/" method="POST">
-	<label for="balance">Enter Balance</label><br>
-	<input id="balance" type="number" name="balance"><br>
-	<button type="submit">Submit</button>
+	<label class="form-control" for="balance">Enter Balance</label><br>
+	<input class="form-control" id="balance" type="number" name="balance"><br>
+	<button class="btn btn-primary" type="submit">Submit</button>
 </form>
 </body>
 </html>
