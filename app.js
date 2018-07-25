@@ -6,6 +6,7 @@ const db = require('./db.js');
 const expenses = require('./controllers/expenses.js');
 const deposits = require('./controllers/deposits.js');
 const passport = require('passport');
+const bcrypt = require('bcryptjs');
 const LocalStrategy = require('passport-local').Strategy;
 var bodyParser = require('body-parser');
 
@@ -16,6 +17,22 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public'));
 
 app.use('/', expenses, deposits);
+
+/** Passport Initialization **/
+
+app.use(passport.initialize());
+
+/** Passport Local Strategy **/
+
+passport.use(new LocalStrategy(function(username, password, done){
+	db.User.findOne({username: username}, function(err, user){
+		if (err)
+			return done(err);
+		if (user == null)
+			return done(null, false);
+		
+	});
+}));
 
 /* Check to see if the object is empty */
 function isEmpty(obj) {
