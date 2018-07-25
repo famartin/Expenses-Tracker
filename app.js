@@ -10,6 +10,8 @@ const passport = require('passport');
 const bcrypt = require('bcryptjs');
 const LocalStrategy = require('passport-local').Strategy;
 const expressValidator = require('express-validator');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 var bodyParser = require('body-parser');
 
 app.set('view engine', 'ejs');
@@ -19,11 +21,21 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public'));
 app.use(expressValidator());
 
+var sessionStore = new MongoStore({mongooseConnection: db.db});
+
+app.use(session({
+	secret: 'test',
+	resave: false,
+	store: sessionStore,
+	saveUninitialized: false
+}));
 
 /** Passport Initialization **/
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use('/', expenses, deposits, users);
 
 /** Passport Local Strategy **/
 
@@ -41,8 +53,6 @@ passport.use(new LocalStrategy(function(username, password, done){
 		});
 	});
 }));
-
-app.use('/', expenses, deposits, users);
 
 /* Check to see if the object is empty */
 function isEmpty(obj) {

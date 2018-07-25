@@ -63,4 +63,14 @@ router.post('/signup', function(req, res, next){
 	}
 });
 
+passport.serializeUser(function(id, done){
+	done(null, id);
+});
+
+passport.deserializeUser(function(id, done){
+	db.User.findById(id, function(err, user){
+		done(err, id);
+	});
+});
+
 module.exports = router;
