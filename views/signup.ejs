@@ -3,6 +3,26 @@
 <%- include('head'); %>
 </head>
 <body>
+<% if (typeof errors != 'undefined') { %>
+<% for(var i=0; i < errors.length; i++) { %>
+    <div class="alert alert-danger" role="alert">
+    <%= errors[i].msg %>
+    </div>
+<% } %>
+<% } %>
+<% if (typeof uniqueErrors != 'undefined') { %>
+    <% if (typeof uniqueErrors.errors.username != 'undefined') { %>
+        <div class="alert alert-danger" role="alert">
+            <%= uniqueErrors.errors.username.message %>
+            </div>
+    <% } %>
+    <% if (typeof uniqueErrors.errors.email != 'undefined') { %>
+        <div class="alert alert-danger" role="alert">
+            <%= uniqueErrors.errors.email.message %>
+        </div>
+    <% } %>
+<br>
+<% } %>
 <form action="/signup" method="post">
 <input type="text" name="username" required>
 <input type="text" name="password" required>

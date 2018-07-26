@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const key = require('./keys.js');
+const uniqueValidator = require('mongoose-unique-validator');
 
 /** Connect to MongoDB **/
 
@@ -49,6 +50,10 @@ var depositSchema =	new Schema({
 	balanceId:		{type: String, required: true},
 	description:	{type: String}
 });
+
+/** Unique Check for the Sign Up Form **/
+
+userSchema.plugin(uniqueValidator, {message: 'This {PATH} is already taken, please choose another.'});
 
 /** Create the Models **/
 

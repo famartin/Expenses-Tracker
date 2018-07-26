@@ -11,6 +11,8 @@ const expressValidator = require('express-validator');
 var checkFormFields = function(req){
 	req.checkBody('username', 'Username field can not be empty.').notEmpty();
 	req.checkBody('username', 'Username must be between 5-15 characters long.').len(5, 15);
+	req.checkBody('password', 'Password must be between 6-50 characters long.').len(6, 50);
+	req.checkBody('password', 'Password must include one lowercase character, one uppercase character, a number, and a special character.').matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.* )(?=.*[^a-zA-Z0-9]).{8,}$/, "i");
 }
 
 /** Login GET Route **/
@@ -40,7 +42,7 @@ router.post('/signup', function(req, res, next){
 	var errors = req.validationErrors();
 
 	if (errors){
-		console.log(errors);
+		res.render('signup', {errors: errors});
 	}
 	else{
 		var hash = bcrypt.hashSync(req.body.password, salt);
@@ -51,7 +53,7 @@ router.post('/signup', function(req, res, next){
 
 		user.save(function(err){
 			if (err)
-				throw err;
+				res.render('signup', {uniqueErrors: err});
 			else{
 				req.login(user, function(err){
 					if (err)
