@@ -42,7 +42,7 @@ router.get('/cancel-expense/:id', function(req, res){
 
 /** List Expenses GET Route **/
 
-router.get('/list-expenses/:category*?', function(req, res){
+router.get('/list-expenses/:category*?', authenticationMiddleware(), function(req, res){
 	db.Expense.find(function(err, expenses){
 		if (err) throw err;
 		var sum = 0;
@@ -106,5 +106,13 @@ router.get('/list-expenses/:category*?', function(req, res){
 		});
 	});
 });
+
+function authenticationMiddleware() {
+	return (req, res, next) => {
+		if (req.isAuthenticated())
+			return next();
+		res.redirect('/login');
+	}
+}
 
 module.exports = router;

@@ -46,7 +46,7 @@ passport.use(new LocalStrategy(function(username, password, done){
 		if (user == null)
 			return done(null, false);
 		bcrypt.compare(password, user.password, function(err, response){
-			if (reponse == true)
+			if (response == true)
 				return done(null, user);
 			else
 				return done(null, false);
@@ -88,6 +88,16 @@ app.post('/', function(req, res){
 		res.redirect('/');
 	});
 });
+
+/** Check to see if a user is signed in **/
+
+function authenticationMiddleware() {
+	return (req, res, next) => {
+		if (req.isAuthenticated())
+			return (next);
+		res.redirect('/login');
+	}
+}
 
 /** Listen to the port **/
 
