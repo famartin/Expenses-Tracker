@@ -3,11 +3,15 @@
 	<%- include('head'); %>
 </head>
 <body>
-<form action="/" method="POST">
-	<label class="form-control" for="balance">Enter Balance</label><br>
-	<input class="form-control" id="balance" type="number" name="balance"><br>
-	<button class="btn btn-primary" type="submit">Submit</button>
+<div class="container">
+<form style="width: 25%;margin: 0 auto;margin-top: 25%" action="/add-balance" method="POST">
+	<div class="form-group">
+	<h4 style="text-align: center">Enter Balance</h4>
+	<input class="form-control" id="balance" type="number" name="balance" required>
+	</div>
+	<button style="display: block;margin:0 auto" class="btn btn-primary" type="submit">Submit</button>
 </form>
+</div>
 </body>
 </html>
 

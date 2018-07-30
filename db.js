@@ -29,7 +29,8 @@ var userSchema =	new Schema({
 /** Balance Schema **/
 
 var balanceSchema =	new Schema({
-	total:			{type: Number, required: true}
+	total:			{type: Number, required: true},
+	user:			{type: String, required: true}
 });
 
 /** Expense Schema **/

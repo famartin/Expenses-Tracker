@@ -65,28 +65,19 @@ function isEmpty(obj) {
 
 /** Home GET Route **/
 
-app.get('/', function(req, res){
-	db.Balance.find(function(err, balance){
-		if (err) throw err;
-		if (!isEmpty(balance)){
-			res.render('home', {balance: balance});
-		}
-		else
-			res.render('addBalance');
-	});
-});
-
-/** Add Initial Balance POST Route **/
-
-app.post('/', function(req, res){
-	var balance = new db.Balance({
-		total: req.body.balance
-	});
-
-	balance.save(function(err){
-		if(err) throw (err);
-		res.redirect('/');
-	});
+app.get('/', function(req, res) {
+	if (req.isAuthenticated() == true) {
+		db.Balance.find({user: req.session.passport.user.username}, function(err, balance){
+			if (err) throw err;
+			if (!isEmpty(balance)){
+				res.render('home', {balance: balance});
+			}
+			else
+				res.redirect('/add-balance');
+		});
+	}else{
+		res.redirect('/login');
+	}
 });
 
 /** Check to see if a user is signed in **/

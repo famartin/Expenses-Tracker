@@ -28,6 +28,14 @@ router.post('/login', passport.authenticate('local', {
 	failureRedirect: '/login'
 }));
 
+/** Logout GET Route **/
+
+router.get('/logout', function(req, res){
+	req.logout();
+	req.session.destroy();
+	res.redirect('/');
+});
+
 /** SignUp GET Route **/
 
 router.get('/signup', function(req, res){
