@@ -35,6 +35,18 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+/** Global Variables to use in views **/
+
+app.use(function(req, res, next){
+	if (req.isAuthenticated()) {
+		res.locals.username = req.session.passport.user.username;
+	}
+	else {
+		res.locals.username = "";
+	}
+	next();
+});
+
 app.use('/', expenses, deposits, users);
 
 /** Passport Local Strategy **/

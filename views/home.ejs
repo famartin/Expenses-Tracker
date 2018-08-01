@@ -11,13 +11,14 @@
 			<div class="jumbotron jumbotron-fluid">
 				<div class="container">
 					<h2 style="text-align:center;">Balance: $<%= balance[0].total.toFixed(2) %></h2>
+					<h5 style="text-align:center;"><%= username %></h5>
 				</div>
 			</div>
 			<div id="accordion">
   				<div class="card">
     				<div class="card-header" id="headingOne">
       					<h5 class="mb-0">
-        					<button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        					<button style="text-decoration:none;color:black;display:block;margin:0 auto;" class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
           						Add Expense
         					</button>
       					</h5>
@@ -53,7 +54,7 @@
   				<div class="card">
     				<div class="card-header" id="headingTwo">
       					<h5 class="mb-0">
-        					<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+        					<button style="text-decoration:none;color:black;display:block;margin:0 auto;" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
           						Add to Balance
         					</button>
       					</h5>
