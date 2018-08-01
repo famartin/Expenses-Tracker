@@ -9,7 +9,6 @@ router.post('/add-expense', function(req, res){
 		name: req.body.name,
 		amount: req.body.amount,
 		category: req.body.category,
-		balanceId: req.body.balanceId,
 		username: req.session.passport.user.username
 	});
 
@@ -17,7 +16,7 @@ router.post('/add-expense', function(req, res){
 		if (err) throw err;
 	});
 
-	db.Balance.findOneAndUpdate({ _id: req.body.balanceId}, {
+	db.Balance.findOneAndUpdate({user: req.session.passport.user.username}, {
 		$inc: {total: (req.body.amount * -1)}
 		}, function(err, balance){
 			if (err) throw err;
@@ -32,7 +31,7 @@ router.get('/cancel-expense/:id', function(req, res){
 	db.Expense.findOneAndDelete({_id: req.params.id}, function(err, expense){
 		if (err) throw err;
 
-		db.Balance.findOneAndUpdate({_id: expense.balanceId}, {
+		db.Balance.findOneAndUpdate({user: expense.username}, {
 			$inc: {total: expense.amount}
 		}, function(err, balance){
 				if (err) throw err;

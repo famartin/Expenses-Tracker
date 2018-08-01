@@ -40,7 +40,6 @@ var expenseSchema =	new Schema({
 	date:			{type: Date, default: Date.now},
 	amount:			{type: Number, required: true},
 	category:		{type: String, required: true},
-	balanceId:		{type: String, required: true},
 	username:		{type: String, required: true}
 });
 
