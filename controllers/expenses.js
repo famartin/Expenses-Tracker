@@ -9,7 +9,8 @@ router.post('/add-expense', function(req, res){
 		name: req.body.name,
 		amount: req.body.amount,
 		category: req.body.category,
-		balanceId: req.body.balanceId
+		balanceId: req.body.balanceId,
+		username: req.session.passport.user.username
 	});
 
 	expense.save(function(err){
@@ -43,37 +44,37 @@ router.get('/cancel-expense/:id', function(req, res){
 /** List Expenses GET Route **/
 
 router.get('/list-expenses/:category*?', authenticationMiddleware(), function(req, res){
-	db.Expense.find(function(err, expenses){
+	db.Expense.find({username: req.session.passport.user.username}, function(err, expenses){
 		if (err) throw err;
 		var sum = 0;
 		for (var i = 0; i < expenses.length; i++){
 			sum += expenses[i].amount;
 		}
-		db.Expense.find({category: 'food'}, function(err, foodExpenses){
+		db.Expense.find({category: 'food', username: req.session.passport.user.username}, function(err, foodExpenses){
 			if (err) throw err;
 			var foodSum = 0;
 			for (var i = 0; i < foodExpenses.length; i++){
 				foodSum += foodExpenses[i].amount;
 			}
-			db.Expense.find({category: 'gas'}, function(err, gasExpenses){
+			db.Expense.find({category: 'gas', username: req.session.passport.user.username}, function(err, gasExpenses){
 				if (err) throw err;
 				var gasSum = 0;
 				for (var i = 0; i < gasExpenses.length; i++){
 					gasSum += gasExpenses[i].amount;
 				}
-				db.Expense.find({category: 'bill'}, function(err, billExpenses){
+				db.Expense.find({category: 'bill', username: req.session.passport.user.username}, function(err, billExpenses){
 					if (err) throw err;
 					var billSum = 0;
 					for (var i = 0; i < billExpenses.length; i++){
 						billSum += billExpenses[i].amount;
 					}
-					db.Expense.find({category: 'fun'}, function(err, funExpenses){
+					db.Expense.find({category: 'fun', username: req.session.passport.user.username}, function(err, funExpenses){
 						if (err) throw err;
 						var funSum = 0;
 						for (var i = 0; i < funExpenses.length; i++){
 							funSum += funExpenses[i].amount;
 						}
-						db.Balance.find(function(err, balance){
+						db.Balance.find({user: req.session.passport.user.username}, function(err, balance){
 							if (err) throw err;
 							var cats = {
 								"food": [foodExpenses, foodSum],
