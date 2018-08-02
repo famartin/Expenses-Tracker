@@ -28,7 +28,6 @@
       					<div class="card-body">
 							<form action="/add-expense" method="POST">
 								<div class="form-group">
-									<input class="form-control" type="text" name="balanceId" readonly value="<%= balance[0]._id %>"><br>
 									<input class="form-control" type="text" name="name" placeholder="Expense Name"><br>
 									<div class="input-group mb-3">
 										<div class="input-group-prepend">
@@ -63,7 +62,6 @@
       					<div class="card-body">
 							<form action="/deposit" method="POST">
 								<div class="form-group">
-									<input class="form-control" type="text" name="balanceId" readonly value="<%= balance[0]._id %>"><br>
 									<textarea class="form-control" rows="3" name="description" placeholder="Short description [30 character max]"></textarea><br>
 									<div class="input-group mb-3">
 										<div class="input-group-prepend">

@@ -28,15 +28,15 @@ router.post('/add-balance', function(req, res){
 router.post('/deposit', function(req, res){
 	var deposit = new db.Deposit({
 		amount: req.body.amount,
-		balanceId: req.body.balanceId,
-		description: req.body.description
+		description: req.body.description,
+		username: req.session.passport.user.username
 	});
 
 	deposit.save(function(err){
 		if (err) throw err;
 	});
 
-	db.Balance.findOneAndUpdate({ _id: req.body.balanceId}, {
+	db.Balance.findOneAndUpdate({user: req.session.passport.user.username}, {
 		$inc: {total: req.body.amount}
 		}, function(err, balance){
 			if (err) throw err;
@@ -50,7 +50,7 @@ router.get('/cancel-deposit/:id', function(req, res){
 	db.Deposit.findOneAndDelete({_id: req.params.id}, function(err, deposit){
 		if (err) throw err;
 
-		db.Balance.findOneAndUpdate({_id: deposit.balanceId}, {
+		db.Balance.findOneAndUpdate({user: deposit.username}, {
 			$inc: {total: (deposit.amount * -1)}
 		}, function(err, balance){
 				if (err) throw err;
@@ -61,8 +61,8 @@ router.get('/cancel-deposit/:id', function(req, res){
 
 /** List Deposits GET Route **/
 
-router.get('/list-deposits', function(req, res){
-	db.Deposit.find(function(err, deposits){
+router.get('/list-deposits', authenticationMiddleware(), function(req, res){
+	db.Deposit.find({username: req.session.passport.user.username}, function(err, deposits){
 		if (err) throw err;
 
 		var sum = 0;
