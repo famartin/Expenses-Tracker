@@ -8,7 +8,7 @@ const expressValidator = require('express-validator');
 
 /** Check the Sign Up Form Fields **/
 
-var checkFormFields = function(req){
+var checkFormFields = function(req) {
 	req.checkBody('username', 'Username field can not be empty.').notEmpty();
 	req.checkBody('username', 'Username must be between 5-15 characters long.').len(5, 15);
 	req.checkBody('password', 'Password must be between 6-50 characters long.').len(6, 50);
@@ -17,7 +17,7 @@ var checkFormFields = function(req){
 
 /** Login GET Route **/
 
-router.get('/login', function(req, res){
+router.get('/login', function(req, res) {
 	res.render('login');
 });
 
@@ -30,7 +30,7 @@ router.post('/login', passport.authenticate('local', {
 
 /** Logout GET Route **/
 
-router.get('/logout', function(req, res){
+router.get('/logout', function(req, res) {
 	req.logout();
 	req.session.destroy();
 	res.redirect('/');
@@ -38,13 +38,13 @@ router.get('/logout', function(req, res){
 
 /** SignUp GET Route **/
 
-router.get('/signup', function(req, res){
+router.get('/signup', function(req, res) {
 	res.render('signup');
 });
 
 /** SignUp POST Route **/
 
-router.post('/signup', function(req, res, next){
+router.post('/signup', function(req, res, next) {
 	checkFormFields(req);
 
 	var errors = req.validationErrors();
@@ -63,7 +63,7 @@ router.post('/signup', function(req, res, next){
 			if (err)
 				res.render('signup', {uniqueErrors: err});
 			else{
-				req.login(user, function(err){
+				req.login(user, function(err) {
 					if (err)
 						console.log(err);
 				});
@@ -73,12 +73,12 @@ router.post('/signup', function(req, res, next){
 	}
 });
 
-passport.serializeUser(function(id, done){
+passport.serializeUser(function(id, done) {
 	done(null, id);
 });
 
-passport.deserializeUser(function(id, done){
-	db.User.findById(id, function(err, user){
+passport.deserializeUser(function(id, done) {
+	db.User.findById(id, function(err, user) {
 		done(err, id);
 	});
 });

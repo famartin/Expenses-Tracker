@@ -2,10 +2,29 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db.js');
 
+/** Check to see if the object is empty **/
+
+function isEmpty(obj) {
+	for(var key in obj) {
+		if(obj.hasOwnProperty(key))
+			return (false);
+	}
+	return (true);
+}
+
+
 /** Enter Initial Balance GET Route **/
 
 router.get('/add-balance', authenticationMiddleware(), function(req, res){
-	res.render('addBalance');
+	db.Balance.find({user: req.session.passport.user.username}, function(err, balance){
+		if (err) throw err;
+		if (!isEmpty(balance)) {
+			res.redirect('/');
+		}
+		else {
+			res.render('addBalance');
+		}
+	});
 });
 
 /** Enter Initial Balance POST Route **/

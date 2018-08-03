@@ -4,12 +4,26 @@
     align-items: stretch;
 }
 
+.white {
+	color: white;
+}
+
+.purp-back {
+	background: linear-gradient(#9d8db2, #f1eaf9);
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+}
+
 table tr {
 	color: #3d3d3d;
 }
 
 table tr a {
 	color: #3d3d3d;
+}
+
+a:hover {
+	text-decoration: none;
 }
 
 #sidebar {

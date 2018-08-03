@@ -2,7 +2,7 @@
 <head>
 <%- include('head'); %>
 </head>
-<body style="background-color: #f1edff">
+<body class="purp-back">
 <div class="container">
 <% if (typeof errors != 'undefined') { %>
 <% for(var i=0; i < errors.length; i++) { %>
@@ -26,13 +26,14 @@
 <% } %>
 <form style="width: 45%;margin: 0 auto; margin-top: 25%;" action="/signup" method="post">
 	<div class="form-group">
-		<h4 style="text-align:center">Sign Up</h4>
+		<h4 style="text-align:center" class="white">Sign Up</h4>
 		<input type="text" class="form-control" name="username" placeholder="Enter Username" autocomplete="off" required>
 		<small id="usernameHelp" class="form-text text-muted">5-15 characters</small>
 		<input type="password" class="form-control" name="password" placeholder="Enter Password" required>
 		<small id="passwordHelp2" class="form-text text-muted">6-50 characters. One lowercase, uppercase, number and special character</small>
 	</div>
-	<button style="display: block;margin: 0 auto;" type="submit" class="btn btn-primary">Sign Up</button> 
+	<button style="display: block;margin: 0 auto;" type="submit" class="btn btn-light">Sign Up</button>
+	<p style="text-align:center;margin-top:2vw"><a  style="color:white;" href="/login">Log In</a></p> 
 </form>
 </div>
 </body>

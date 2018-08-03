@@ -66,7 +66,8 @@ passport.use(new LocalStrategy(function(username, password, done){
 	});
 }));
 
-/* Check to see if the object is empty */
+/** Check to see if the object is empty **/
+
 function isEmpty(obj) {
     for(var key in obj) {
         if(obj.hasOwnProperty(key))
