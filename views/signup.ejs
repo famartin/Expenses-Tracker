@@ -4,6 +4,7 @@
 </head>
 <body class="purp-back">
 <div class="container">
+<h1 style="margin-top:10%;" class="white center montserrat">Expense Tracker</h1>
 <% if (typeof errors != 'undefined') { %>
 <% for(var i=0; i < errors.length; i++) { %>
     <div class="alert alert-danger" role="alert">
@@ -24,16 +25,16 @@
     <% } %>
 <br>
 <% } %>
-<form style="width: 45%;margin: 0 auto; margin-top: 25%;" action="/signup" method="post">
+<form style="width: 45%;margin: 0 auto; margin-top:10%;" action="/signup" method="post">
 	<div class="form-group">
-		<h4 style="text-align:center" class="white">Sign Up</h4>
+		<h4 class="white center">Sign Up</h4>
 		<input type="text" class="form-control" name="username" placeholder="Enter Username" autocomplete="off" required>
 		<small id="usernameHelp" class="form-text text-muted">5-15 characters</small>
 		<input type="password" class="form-control" name="password" placeholder="Enter Password" required>
 		<small id="passwordHelp2" class="form-text text-muted">6-50 characters. One lowercase, uppercase, number and special character</small>
 	</div>
 	<button style="display: block;margin: 0 auto;" type="submit" class="btn btn-light">Sign Up</button>
-	<p style="text-align:center;margin-top:2vw"><a  style="color:white;" href="/login">Log In</a></p> 
+	<p style="margin-top:2vw" class="center"><a style="color:white;" href="/login">Log In</a></p> 
 </form>
 </div>
 </body>

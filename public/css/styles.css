@@ -4,6 +4,14 @@
     align-items: stretch;
 }
 
+.center {
+	text-align:center;
+}
+
+.montserrat {
+	font-family: 'Montserrat', sans-serif;
+}
+
 .white {
 	color: white;
 }
@@ -30,14 +38,14 @@ a:hover {
     min-width: 200px;
     max-width: 200px;
 	min-height: 100vh;
-	background: #7386D5;
-    color: #fff;
+	background-color: rgb(96, 96, 96, .05);
+    color: black;
     transition: all 0.3s;
 }
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #6d7fcc;
+    background: transparent !important;
 }
 
 #sidebar ul.components {
