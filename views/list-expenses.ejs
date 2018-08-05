@@ -2,67 +2,68 @@
 <head>
 <%- include('head') %>
 </head>
-<body>
-<div class="wrapper">
-<%- include('nav'); %>
-<div class="container" id="content">
-<%- include('nav-button') %>
-<br>
-<h4>Total: $<%= total.toFixed(2) %></h4>
-<table style="width:100%" class="table table-hover">
-<thead class="thead-dark">
-	<tr>
-	<th scope="col">Name</th>
-	<th scope="col">Amount</th>
-	<th scope="col">Date</th>
-	<th scope="col">Category</th>
-	<th scope="col">Cancel</th>
-	</tr>
-</thead>
-<% expenses.forEach(function(expense){ %>
-	<% if (expense.category == "food"){ %>
-	<% 		var bgColor = "#f9acad"; %>
-	<% }else if (expense.category == "gas"){ %>
-	<% 		var bgColor = "#d0f2c6"; %>
-	<% }else if (expense.category == "bill"){ %>
-	<% 		var bgColor = "#c6e6f2"; %>
-	<% }else{ %>
-	<%		var bgColor = "#ead9f9"; %>
-	<% } %>
-	<tr>
-		<td><%= expense.name %></td>
-		<td>$<%= expense.amount.toFixed(2) %></td>
-		<td><%= expense.date.toDateString() %></td>
-		<td><a href="/list-expenses/<%= expense.category %>"><%= expense.category.charAt(0).toUpperCase() + expense.category.slice(1) %></a>
-		</td>
-		<td><a href="/cancel-expense/<%= expense._id %>">Cancel</a></td>
-	</tr>
-<% }); %>
-</table>
-<canvas id="myChart"></canvas>
-</div>
-</div>
+<body class="purp-back">
+	<div class="wrapper">
+		<%- include('nav'); %>
+		<div style="background-color:white;margin-top:2vw;margin-bottom:2vw;" class="container" id="content">
+			<%- include('nav-button') %>
+			<br>
+			<h4 class="center"><span class="montserrat">Total:</span> $<%= total.toFixed(2) %></h4>
+			<table style="width:100%;" class="table table-hover">
+				<thead class="thead-dark">
+					<tr>
+						<th scope="col">Name</th>
+						<th scope="col">Amount</th>
+						<th scope="col">Date</th>
+						<th scope="col">Category</th>
+						<th scope="col">Cancel</th>
+					</tr>
+				</thead>
+				<% expenses.forEach(function(expense){ %>
+				<% if (expense.category == "food"){ %>
+				<% 		var bgColor = "#f9acad"; %>
+				<% }else if (expense.category == "gas"){ %>
+				<% 		var bgColor = "#d0f2c6"; %>
+				<% }else if (expense.category == "bill"){ %>
+				<% 		var bgColor = "#c6e6f2"; %>
+				<% }else{ %>
+				<%		var bgColor = "#ead9f9"; %>
+				<% } %>
+					<tr>
+						<td><%= expense.name %></td>
+						<td>$<%= expense.amount.toFixed(2) %></td>
+						<td><%= expense.date.toDateString() %></td>
+						<td><a href="/list-expenses/<%= expense.category %>"><%= expense.category.charAt(0).toUpperCase() + expense.category.slice(1) %></a></td>
+						<td><a href="/cancel-expense/<%= expense._id %>">Cancel</a></td>
+					</tr>
+				<% }); %>
+			</table>
+			<canvas style="width:100%;" id="myChart"></canvas>
+		</div>
+	</div>
 <%- include('js-scripts'); %>
 <script>
-	let myChart = document.getElementById('myChart').getContext('2d');
+let myChart = document.getElementById('myChart').getContext('2d');
 
-	let expenseChart = new Chart(myChart, {
-		type: 'doughnut',
-		data: {
-			labels: ['Food', 'Gas', 'Bill', 'Fun', 'Balance'],
-			datasets: [{
-				label: 'Categories',
-				data: [<%= foodSum %>, <%= gasSum %>, <%= billSum %>, <%= funSum %>, <%= balance[0].total %>],
-				backgroundColor: ['#f9acad', '#d0f2c6', '#c6e6f2', '#ead9f9', '#e2e2e2']
-			}]
-		},
-		options: {
-			title: {
-				display: true,
-				text: 'Expenses by Category'
-			}
-		}
-	});
+  console.log('It works');
+  
+   let expenseChart = new Chart(myChart, {
+       type: 'doughnut',
+       data: {
+           labels: ['Food', 'Gas', 'Bill', 'Fun', 'Balance'],
+           datasets: [{
+              label: 'Categories',
+              data: [<%= foodSum %>, <%= gasSum %>, <%= billSum %>, <%= funSum %>, <%= balance[0].total %>],
+              backgroundColor: ['#f9acad', '#d0f2c6', '#c6e6f2', '#ead9f9', '#e2e2e2']
+          }]
+      },
+      options: {
+          title: {
+              display: true,
+              text: 'Expenses by Category'
+          }
+      }
+  });
 </script>
 </body>
 </html>
