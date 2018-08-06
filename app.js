@@ -80,11 +80,12 @@ function isEmpty(obj) {
 
 app.get('/', function(req, res) {
 	if (req.isAuthenticated() == true) {
-		db.Balance.find({user: req.session.passport.user.username}, function(err, balance){
+		db.Balance.findOne({user: req.session.passport.user.username}, function(err, balance){
 			if (err)
 				throw err;
 			if (!isEmpty(balance)) {
 				res.render('home', {balance: balance});
+				console.log(balance.total);
 			}
 			else
 				res.redirect('/add-balance');

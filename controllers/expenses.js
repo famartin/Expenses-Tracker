@@ -5,24 +5,33 @@ const db = require('../db.js');
 /** Add Expense POST Route **/
 
 router.post('/add-expense', function(req, res){
-	var expense = new db.Expense({
-		name: req.body.name,
-		amount: req.body.amount,
-		category: req.body.category,
-		username: req.session.passport.user.username
-	});
-
-	expense.save(function(err){
+	db.Balance.findOne({user: req.session.passport.user.username}, function(err, balance){
 		if (err) throw err;
-	});
+		console.log(balance.total, req.body.amount);
+		if (balance.total >= Math.round(req.body.amount * 100) / 100){
+			var expense = new db.Expense({
+				name: req.body.name,
+				amount: Math.round(req.body.amount * 100) / 100,
+				category: req.body.category,
+				username: req.session.passport.user.username
+			});
 
-	db.Balance.findOneAndUpdate({user: req.session.passport.user.username}, {
-		$inc: {total: (req.body.amount * -1)}
-		}, function(err, balance){
-			if (err) throw err;
+			expense.save(function(err){
+				if (err) throw err;
+			});
+
+			db.Balance.findOneAndUpdate({user: req.session.passport.user.username}, {
+				$inc: {total: ((Math.round(req.body.amount * 100) / 100) * -1)}
+				}, function(err, balance){
+					if (err) throw err;
+					res.redirect('/');
+				}
+			);
+		}
+		else{
 			res.redirect('/');
 		}
-	);
+	});
 });
 
 /** Cancel Expense GET Route **/

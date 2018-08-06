@@ -31,7 +31,7 @@ router.get('/add-balance', authenticationMiddleware(), function(req, res){
 
 router.post('/add-balance', function(req, res){
 	var balance = new db.Balance({
-		total: req.body.balance,
+		total: (Math.round(req.body.balance * 100) / 100),
 		user: req.session.passport.user.username
 	});
 
