@@ -46,7 +46,7 @@ router.post('/add-balance', function(req, res){
 
 router.post('/deposit', function(req, res){
 	var deposit = new db.Deposit({
-		amount: req.body.amount,
+		amount: Math.round(req.body.amount * 100) / 100,
 		description: req.body.description,
 		username: req.session.passport.user.username
 	});
@@ -56,7 +56,7 @@ router.post('/deposit', function(req, res){
 	});
 
 	db.Balance.findOneAndUpdate({user: req.session.passport.user.username}, {
-		$inc: {total: req.body.amount}
+		$inc: {total: Math.round(req.body.amount * 100) / 100}
 		}, function(err, balance){
 			if (err) throw err;
 			res.redirect('/');
