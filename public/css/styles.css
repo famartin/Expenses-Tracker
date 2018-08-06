@@ -8,6 +8,10 @@
 	text-align:center;
 }
 
+.fullWidth {
+	width: 100%;
+}
+
 .montserrat {
 	font-family: 'Montserrat', sans-serif;
 }
@@ -20,6 +24,12 @@
 	background: linear-gradient(#9d8db2, #f1eaf9);
 	background-repeat: no-repeat;
 	background-attachment: fixed;
+}
+
+.list-back {
+	background-color: white;
+	margin-top: 2vw;
+	margin-bottom: 2vw;
 }
 
 table tr {

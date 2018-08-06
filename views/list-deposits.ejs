@@ -5,11 +5,11 @@
 <body class="purp-back">
 <div class="wrapper">
 <%- include('nav'); %>
-<div style="background-color:white;margin-top:2vw;margin-bottom:2vw;" class="container" id="content">
+<div class="container list-back" id="content">
 <%- include('nav-button'); %>
 <br>
 <h4 class="center"><span class="montserrat">Total:</span> $<%= sum.toFixed(2) %></h4>
-<table style="width:100%" class="table table-hover">
+<table class="table table-hover fullWidth">
 <thead class="thead-dark">
 	<tr>
 		<th scope="col">Date</th>
@@ -27,7 +27,7 @@
 	</tr>
 <% }); %>
 </table>
-<canvas style="width:100%" id="myChart"></canvas>
+<canvas class="fullWidth" id="myChart"></canvas>
 </div>
 </div>
 <%- include('js-scripts'); %>
