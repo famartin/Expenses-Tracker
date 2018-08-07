@@ -96,7 +96,6 @@ app.get('/', function(req, res) {
 });
 
 /** Check to see if a user is signed in **/
-
 function authenticationMiddleware() {
 	return (req, res, next) => {
 		if (req.isAuthenticated())
