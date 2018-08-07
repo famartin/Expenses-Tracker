@@ -73,6 +73,16 @@ router.post('/signup', function(req, res, next) {
 	}
 });
 
+/** Check to see if a user is signed in **/
+
+function authenticationMiddleware() {
+	return (req, res, next) => {
+		if (req.isAuthenticated())
+			return (next);
+		res.redirect('/login');
+	}
+}
+
 passport.serializeUser(function(id, done) {
 	done(null, id);
 });

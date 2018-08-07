@@ -8,6 +8,11 @@
 	text-align:center;
 }
 
+.btn-center {
+	display:block;
+	margin: 0 auto;
+}
+
 .fullWidth {
 	width: 100%;
 }
