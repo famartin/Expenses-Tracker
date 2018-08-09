@@ -6,7 +6,7 @@ of deposits. The deposits are shown via a line graph.
 
 ## Visit the application
 
-[Expenses Tracker](https://boiling-escarpment-43813.herokuapp.com/)
+[Expenses Tracker](https://expense-tracker-famartin.herokuapp.com/)
 
 ## Built With
 
